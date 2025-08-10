@@ -17,30 +17,28 @@ npm install telomere
 The library must be initialized before use. The `processDelta` function is stateful and can be called repeatedly as more data streams in.
 
 ```typescript
-import { initTelomere } from "telomere";
+import { Telomere } from "telomere";
 
-const telomere = await initTelomere();
+// Initialize the library by calling the imported function
+const telomereInstance = await Telomere();
 
 const partialJson = '{ "key": [1, 2, "hello"';
-const result = telomere.processDelta(partialJson);
+const result = telomereInstance.processDelta(partialJson);
 
 switch (result.type) {
   case "Success":
-    // The 'cap' contains the characters needed to close the JSON.
-    const completed = partialJson + result.cap; // -> '{ "key": [1, 2, "hello"]}'
+    const completed = partialJson + result.cap;
     console.log("JSON completed:", completed);
     break;
 
   case "NotClosable":
-    // The stream is valid so far, but needs more data to be closable.
-    // e.g., waiting for a value after a colon: '{ "key":'
     console.log("JSON is incomplete and needs more data.");
     break;
 }
 
 // For structurally invalid JSON, processDelta will throw an error.
 try {
-  telomere.processDelta('{"key": }');
+  telomereInstance.processDelta('{"key": }');
 } catch (e) {
   console.error(e.message); // -> "corrupted stream"
 }
