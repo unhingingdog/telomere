@@ -1,0 +1,24 @@
+[package]
+name = "telomere_json_wasm"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <you@example.com>"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# The core dependency for WASM bindings.
+wasm-bindgen = "0.2"
+
+telomere_json = "0.1.0" # If published
+serde = { version = "1.0.219", features = ["derive"] }
+serde-wasm-bindgen = "0.6.5"
+js-sys = "0.3.77"
+
+[dependencies.console_error_panic_hook]
+version = "0.1.7"
+optional = true
+
+[features]
+default = ["console_error_panic_hook"]
