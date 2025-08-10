@@ -5,32 +5,35 @@
   "author": "Hamish Gilkison <hamishgilkison@gmail.com>",
   "license": "MIT",
   "type": "module",
+  "module": "./dist/telomere.js",
   "exports": {
     ".": {
-      "import": "./dist/telomere.es.js",
-      "types": "./dist/lib.d.ts"
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/telomere.js",
+      "default": "./dist/telomere.js"
     }
   },
-  "types": "./dist/lib.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/unhingingdog/telomere.git"
   },
-  "files": [
-    "dist",
-    "src/pkg/telomere_json_wasm_bg.wasm"
-  ],
   "scripts": {
     "dev": "npm run build:wasm:release && vite",
     "build:wasm:release": "wasm-pack build --release ./telomere-json-wasm --target web --out-dir src/pkg",
-    "build": "npm run build:wasm:release && vite build",
-    "pretest": "npm run build:wasm:release",
+    "postbuild": "node buildScripts/postbuild.js",
+    "build": "npm run build:wasm:release && vite build && npm run postbuild",
+    "pretest": "npm run build:wasm:release && npm run postbuild",
     "test": "vitest run"
   },
   "devDependencies": {
     "@types/node": "^24.2.1",
     "typescript": "~5.8.3",
     "vite": "^7.1.0",
+    "vite-plugin-dts": "^4.5.4",
     "vite-plugin-wasm": "^3.5.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4",

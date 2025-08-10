@@ -48,6 +48,54 @@ it("correctly handles corrupt input", async () => {
   );
 });
 
+it("correctly handles a series of inputs", async () => {
+  // {
+  const result = telomere.processDelta("{");
+  expect(result).toStrictEqual({
+    type: "Success",
+    cap: "}",
+  });
+
+  // { "ke
+  const result2 = telomere.processDelta(' "ke');
+  expect(result2).toStrictEqual({
+    type: "NotClosable",
+  });
+
+  // { "key"
+  const result3 = telomere.processDelta('y"');
+  expect(result3).toStrictEqual({
+    type: "NotClosable",
+  });
+
+  // { "key":
+  const result4 = telomere.processDelta(":");
+  expect(result4).toStrictEqual({
+    type: "NotClosable",
+  });
+
+  // { "key": "val
+  const result5 = telomere.processDelta('"val');
+  expect(result5).toStrictEqual({
+    type: "Success",
+    cap: '"}',
+  });
+
+  // { "key": "value"
+  const result6 = telomere.processDelta('ue"');
+  expect(result6).toStrictEqual({
+    type: "Success",
+    cap: "}",
+  });
+
+  // { "key": "value"
+  const result7 = telomere.processDelta("}");
+  expect(result7).toStrictEqual({
+    type: "Success",
+    cap: "",
+  });
+});
+
 // Just a dumb benchmark. Should pass on any machine that can install this.
 // It does ~36MB/s on my M1 MBP.
 it("runs fast", () => {

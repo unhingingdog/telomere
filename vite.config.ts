@@ -3,6 +3,7 @@ import wasm from "vite-plugin-wasm";
 import { resolve } from "path";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { fileURLToPath } from "url";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   test: {
@@ -10,7 +11,16 @@ export default defineConfig({
     globals: true,
     includeSource: ["src/**/*.{ts,tsx}"],
   },
-  plugins: [wasm(), tsconfigPaths()],
+  plugins: [
+    wasm(),
+    tsconfigPaths(),
+    dts({
+      outDir: "dist",
+      entryRoot: "src/telomere",
+      include: ["src/telomere/**/*.ts"],
+      insertTypesEntry: true,
+    }),
+  ],
   resolve: {
     alias: [
       {
