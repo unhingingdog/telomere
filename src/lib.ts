@@ -1,4 +1,8 @@
-import Telomere from "./telomere/telomere-wrapper";
+import { initTelomere } from "./telomere/telomere-wrapper";
 import type { ParseResult } from "./telomere/wasm-interface-type";
 
-export { Telomere, type ParseResult };
+const { processDelta } = await initTelomere();
+
+console.log(processDelta("{"));
+
+export { initTelomere, type ParseResult };

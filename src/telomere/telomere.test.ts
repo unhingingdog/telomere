@@ -1,7 +1,7 @@
-// src/lib.test.ts
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import initTelomere, {
+import {
+  initTelomere,
   __initForTests,
   type Telomere,
 } from "./telomere-wrapper";

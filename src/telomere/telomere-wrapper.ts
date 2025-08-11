@@ -15,9 +15,9 @@ export interface Telomere {
   reset(): void;
 }
 
-export default async function initTelomere(
+export const initTelomere = async (
   wasm?: RequestInfo | URL | Response | BufferSource | WebAssembly.Module,
-): Promise<Telomere> {
+): Promise<Telomere> => {
   if (!initialized) {
     await initWasm(wasm);
     initialized = true;
@@ -33,4 +33,4 @@ export default async function initTelomere(
       b = new WasmBalancer();
     },
   };
-}
+};

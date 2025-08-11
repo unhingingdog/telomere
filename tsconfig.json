@@ -8,6 +8,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
+    "allowJs": true,
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -15,7 +16,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@telomere/wasm": ["./telomere-json-wasm/src/pkg"]
+      "@telomere/wasm": ["./telomere-json-wasm/src/pkg/telomere_json_wasm.js"]
     },
     "types": ["vite/client", "vitest", "vitest/globals", "vitest/importMeta"]
   },
