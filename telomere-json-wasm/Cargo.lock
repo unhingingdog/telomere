@@ -114,9 +114,9 @@ dependencies = [
 
 [[package]]
 name = "telomere_json"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2e51487efe4e1d27439630901de196b454b3ab996098959de7e9d38da88feb1c"
+checksum = "b354a91617d5798a3cc613ab7b8c1afde7ec83e9b4c82a82b94218003b864d7b"
 
 [[package]]
 name = "telomere_json_wasm"

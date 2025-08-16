@@ -17,10 +17,10 @@ npm install telomere
 The library must be initialized before use. The `processDelta` function is stateful and can be called repeatedly as more data streams in.
 
 ```typescript
-import { Telomere } from "telomere";
+import { initTelomere } from "telomere";
 
 // Initialize the library by calling the imported function
-const telomereInstance = await Telomere();
+const telomereInstance = await initTelomere();
 
 const partialJson = '{ "key": [1, 2, "hello"';
 const result = telomereInstance.processDelta(partialJson);

@@ -1,6 +1,6 @@
 {
   "name": "telomere",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A WASM-powered library to cap incomplete JSON streams.",
   "author": "Hamish Gilkison <hamishgilkison@gmail.com>",
   "license": "MIT",
